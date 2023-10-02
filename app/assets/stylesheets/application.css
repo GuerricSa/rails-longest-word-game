@@ -13,3 +13,29 @@
  *= require_tree .
  *= require_self
  */
+ul {
+  text-decoration: none;
+  list-style-type: none;
+  display: flex;
+  padding: 0;
+}
+
+.letter {
+  padding: 20px;
+  margin: 20px;
+  border: 3px solid rgb(0, 0, 0);
+  box-shadow: 3px 3px 6px 0px black;;
+  background-color: rgb(43, 111, 159);
+  color: white;
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.letter:first-child {
+  margin-left: 0;
+}
+
+.input-group {
+  margin-left: 60px;
+  width: 40%;
+}
