@@ -6,7 +6,7 @@ class GamesController < ApplicationController
   def new
     # TODO: generate random grid of letters
     @letters = []
-    (1..9).each do
+    9.times do
       letter = ('a'..'z').to_a.sample
       @letters << letter
       @start_time = Time.now
@@ -15,21 +15,16 @@ class GamesController < ApplicationController
 
   def score
     @result = 0
-    # end_time = Time.now
-    # chrono = (end_time.to_i - params[:start_time].to_i)
-    @score = 0
     @grid = params[:letters]
     @attempt = params[:input].downcase
-    url = "https://wagon-dictionary.herokuapp.com/#{@attempt}"
-    dictionary = JSON.parse(URI.open(url).read)
     @truc = test_attempt_grid(@attempt, @grid)
-    if dictionary["found"] && test_attempt_grid(@attempt, @grid)
+    if check_dictionary(@attempt) && test_attempt_grid(@attempt, @grid)
       @result = 3
+      session[:score].nil? ? session[:score] = @attempt.size : session[:score] += @attempt.size
     elsif test_attempt_grid(@attempt, @grid)
-      @result = 1
-    else
-      # @score = dictionary['length'] + (60 - chrono)
       @result = 2
+    else
+      @result = 1
     end
     @result
   end
@@ -37,10 +32,16 @@ class GamesController < ApplicationController
   private
 
   def test_attempt_grid(attempt, grid)
-    attempt_hash = attempt.upcase.chars.to_h { |letter| [letter, attempt.upcase.count(letter)] }
-    grid_hash = ("A".."Z").to_h { |letter| [letter, grid.chars.count(letter)] }
+    attempt_hash = attempt.upcase.chars.to_h { |letter| [letter, attempt.upcase.chars.count(letter)] }
+    grid_hash = ('A'..'Z').to_h { |letter| [letter, grid.chars.count(letter)] }
     attempt_hash.all? do |letter, count|
-      grid_hash[letter] >= count
+      grid_hash[letter] <= count
     end
+  end
+
+  def check_dictionary(attempt)
+    url = "https://wagon-dictionary.herokuapp.com/#{@attempt.strip}"
+    dictionary = JSON.parse(URI.open(url).read)
+    dictionary['found']
   end
 end

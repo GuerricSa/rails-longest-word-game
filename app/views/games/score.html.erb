@@ -2,11 +2,11 @@
 
 <% case @result %>
 <% when 1 %>
-<p> Sorry, but <%=params[:input] %> doesn't seem to be a valid English word...</p>
+<p> Sorry, but <%=params[:input] %> can't be built with <%= params[:letters].split(", ") %></p>
 <% when 2 %>
-<p> Sorry, but <%=params[:input] %> can't be built with <%= params[:letters].splite(", ") %></p>
+<p> Sorry, but <%=params[:input] %> doesn't seem to be a valid English word...</p>
 <% when 3 %>
-<p> Congratulations! <%=params[:input] %> is a valid english word. Your score is <%= @score %></p>
+<p> Congratulations! <%=params[:input] %> is a valid english word. Your score is <%= session[:score] %><%= @score %></p>
 <% end %>
 
 <%= link_to "Rejouer", root_path %>
