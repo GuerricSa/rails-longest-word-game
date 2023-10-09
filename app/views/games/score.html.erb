@@ -2,7 +2,7 @@
 
 <% case @result %>
 <% when 1 %>
-<p> Sorry, but <span class="wrong-word"><%=params[:input] %></span> can't be built with <span class="wrong-word"><%= params[:letters].to_s %></span></p>
+<p> Sorry, but <span class="wrong-word"><%=params[:input] %></span> can't be built with letters : <span class="wrong-word"><%= params[:letters].chars.join(", ") %></span></p>
 <% when 2 %>
 <p> Sorry, but <span class="wrong-word"><%=params[:input] %></span> doesn't seem to be a valid English word...</p>
 <% when 3 %>
