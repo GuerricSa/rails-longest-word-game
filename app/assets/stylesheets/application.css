@@ -38,3 +38,15 @@ ul {
   width: 40%;
 
 }
+
+.wrong-word {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: red;
+}
+
+.true-word {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: green;
+}

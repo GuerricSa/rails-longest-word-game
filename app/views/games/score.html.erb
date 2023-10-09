@@ -1,12 +1,12 @@
-<h1>Results</h1>
+<h1 class="pb-3 mb-3 border-bottom">Results</h1>
 
 <% case @result %>
 <% when 1 %>
-<p> Sorry, but <%=params[:input] %> can't be built with <%= params[:letters].split(", ") %></p>
+<p> Sorry, but <span class="wrong-word"><%=params[:input] %></span> can't be built with <span class="wrong-word"><%= params[:letters].to_s %></span></p>
 <% when 2 %>
-<p> Sorry, but <%=params[:input] %> doesn't seem to be a valid English word...</p>
+<p> Sorry, but <span class="wrong-word"><%=params[:input] %></span> doesn't seem to be a valid English word...</p>
 <% when 3 %>
-<p> Congratulations! <%=params[:input] %> is a valid english word. Your score is <%= session[:score] %><%= @score %></p>
+<p> Congratulations! <span class="true-word"><%=params[:input] %></span> is a valid english word. Your score is <span class="true-word"><%= session[:score] %><%= @score %></span></p>
 <% end %>
 
 <%= link_to "Rejouer", root_path %>
